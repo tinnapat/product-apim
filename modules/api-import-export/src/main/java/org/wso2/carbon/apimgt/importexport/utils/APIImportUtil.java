@@ -540,7 +540,7 @@ public final class APIImportUtil {
 
         Registry registry = APIExportUtil.getRegistry();
         String inSequenceFileName = importedApi.getInSequence();
-        String inSequenceFileLocation = pathToArchive + APIImportExportConstants.IN_SEQUENCE_LOCATION + "custom" +
+        String inSequenceFileLocation = pathToArchive + APIImportExportConstants.IN_SEQUENCE_LOCATION + "Custom" +
                                         File.separator + inSequenceFileName;
 
         String rootRegResourcePath = APIConstants.API_ROOT_LOCATION + RegistryConstants.PATH_SEPARATOR +
@@ -556,18 +556,18 @@ public final class APIImportUtil {
         }
 
         String outSequenceFileName = importedApi.getOutSequence();
-        String outSequenceFileLocation = pathToArchive + APIImportExportConstants.OUT_SEQUENCE_LOCATION + "custom" +
+        String outSequenceFileLocation = pathToArchive + APIImportExportConstants.OUT_SEQUENCE_LOCATION + "Custom" +
                                          File.separator + outSequenceFileName;
 
         //Adding out-sequence, if any
         if (checkFileExistence(outSequenceFileLocation)) {
-            String regResourcePath = rootRegResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_OUT +
+        	String regResourcePath = rootRegResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_OUT +
                               RegistryConstants.PATH_SEPARATOR + outSequenceFileName;
             addSequenceToRegistry(registry, outSequenceFileLocation, regResourcePath);
         }
 
         String faultSequenceFileName = importedApi.getFaultSequence();
-        String faultSequenceFileLocation = pathToArchive + APIImportExportConstants.FAULT_SEQUENCE_LOCATION + "custom" +
+        String faultSequenceFileLocation = pathToArchive + APIImportExportConstants.FAULT_SEQUENCE_LOCATION + "Custom" +
                                            File.separator + outSequenceFileName;
 
         //Adding fault-sequence, if any
