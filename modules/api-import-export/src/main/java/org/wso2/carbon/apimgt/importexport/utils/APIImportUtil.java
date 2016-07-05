@@ -543,14 +543,14 @@ public final class APIImportUtil {
         String inSequenceFileLocation = pathToArchive + APIImportExportConstants.IN_SEQUENCE_LOCATION + "custom" +
                                         File.separator + inSequenceFileName;
 
-        String regResourcePath = APIConstants.API_ROOT_LOCATION + RegistryConstants.PATH_SEPARATOR +
+        String rootRegResourcePath = APIConstants.API_ROOT_LOCATION + RegistryConstants.PATH_SEPARATOR +
                                  importedApi.getId().getProviderName() + RegistryConstants.PATH_SEPARATOR +
                                  importedApi.getId().getApiName() + RegistryConstants.PATH_SEPARATOR +
                                  importedApi.getId().getVersion() + RegistryConstants.PATH_SEPARATOR;
 
         //Adding in-sequence, if any
         if (checkFileExistence(inSequenceFileLocation)) {
-            regResourcePath = regResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_IN +
+            String regResourcePath = rootRegResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_IN +
                               RegistryConstants.PATH_SEPARATOR + inSequenceFileName;
             addSequenceToRegistry(registry, inSequenceFileLocation, regResourcePath);
         }
@@ -561,7 +561,7 @@ public final class APIImportUtil {
 
         //Adding out-sequence, if any
         if (checkFileExistence(outSequenceFileLocation)) {
-            regResourcePath = regResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_OUT +
+            String regResourcePath = rootRegResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_OUT +
                               RegistryConstants.PATH_SEPARATOR + outSequenceFileName;
             addSequenceToRegistry(registry, outSequenceFileLocation, regResourcePath);
         }
@@ -572,7 +572,7 @@ public final class APIImportUtil {
 
         //Adding fault-sequence, if any
         if (checkFileExistence(faultSequenceFileLocation)) {
-            regResourcePath = regResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_FAULT +
+            String regResourcePath = rootRegResourcePath + APIConstants.API_CUSTOM_SEQUENCE_TYPE_FAULT +
                               RegistryConstants.PATH_SEPARATOR + faultSequenceFileName;
             addSequenceToRegistry(registry, faultSequenceFileLocation, regResourcePath);
         }
@@ -600,6 +600,7 @@ public final class APIImportUtil {
                 byte[] inSeqData = IOUtils.toByteArray(inSeqStream);
                 Resource inSeqResource = (Resource) registry.newResource();
                 inSeqResource.setContent(inSeqData);
+                inSeqResource.setMediaType("application/octet-stream");
                 registry.put(regResourcePath, inSeqResource);
             }
         } catch (org.wso2.carbon.registry.api.RegistryException e) {
